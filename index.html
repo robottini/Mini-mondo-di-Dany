@@ -96,9 +96,192 @@ button{cursor:pointer}
 .entry-list{display:grid;gap:8px}.entry{border:1px solid #e8e0c01d;border-radius:14px;padding:12px;background:#e2e9dc08}.entry strong{display:block;font-family:Georgia,serif;font-size:15px;font-weight:400;color:#f2dbad}.entry span{display:block;margin-top:4px;font-size:11px;line-height:1.45;color:#c6d3ca}
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.setting{border:1px solid #e8e0c01d;border-radius:15px;padding:13px;background:#e2e9dc08}.setting label{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#bdcec3;margin-bottom:8px}.setting input:not([type=checkbox]),.setting select{width:100%;border:1px solid #fff2;border-radius:9px;padding:9px;background:#0e262d;color:#f5ead0;outline:none}.setting input[type=checkbox]{accent-color:#e3bd77}.setting .small{font-size:10px;color:#9eb5aa;line-height:1.45;margin-top:7px}.setting.full{grid-column:1/-1}.button-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.action{border:1px solid rgba(242,202,124,.4);background:rgba(242,202,124,.12);border-radius:12px;padding:10px 13px;font-size:11px;color:#f6d79d}.action.secondary{border-color:#d8e2d52c;background:#d8e2d50a;color:#d4dfd5}.action.danger{border-color:#e5927960;color:#f0b09c;background:#e5927910}
 #diag{position:absolute;right:max(22px,env(safe-area-inset-right,22px));top:calc(max(16px,env(safe-area-inset-top,16px)) + 136px);font:10px/1.6 ui-monospace,monospace;color:#d8e2d6;background:#10292dcc;border:1px solid #fff2;border-radius:10px;padding:8px 10px;display:none;pointer-events:none;z-index:2}
-@media (pointer:coarse),(max-width:900px){#hint{display:none}#followBadge{top:calc(max(14px,env(safe-area-inset-top,14px)) + 68px);right:max(14px,env(safe-area-inset-right,14px));min-width:150px}#bottom-note{bottom:24px}#controls{top:max(14px,env(safe-area-inset-top,14px));right:max(14px,env(safe-area-inset-right,14px));gap:6px}.control{min-width:58px;height:58px;border-radius:16px;padding:6px 8px}.control.wide{min-width:64px}.control .ico{font-size:19px}.altitude-selector{right:max(20px,env(safe-area-inset-right,20px));top:calc(70% + 68px);bottom:auto;width:216px;height:60px;padding:5px 7px 5px 11px;gap:5px}.control.altitude{min-width:58px;width:58px;height:48px}#brand{top:max(14px,env(safe-area-inset-top,14px));left:max(14px,env(safe-area-inset-left,14px));padding:8px 12px 8px 9px}.brand-mark{width:34px;height:34px;border-radius:11px;font-size:17px}#telemetry{top:max(14px,env(safe-area-inset-top,14px));left:50%;transform:translateX(-50%);gap:6px}.readout,#compass{min-width:68px;height:52px;padding:6px 10px;border-radius:14px}.readout .label{font-size:7px}.readout .value{font-size:10.5px}#joystick{left:max(20px,env(safe-area-inset-left,20px));top:70%;bottom:auto;transform:translateY(-50%);padding:13px 15px}#joystickRight{right:max(20px,env(safe-area-inset-right,20px));top:70%;bottom:auto;transform:translateY(-50%);padding:13px 15px}.lever-track.vertical{width:72px;height:172px}.lever-track.horizontal{width:186px;height:72px}.lever-thumb{width:54px;height:54px;margin:-27px}}
-@media (max-width:680px){#telemetry{top:max(12px,env(safe-area-inset-top,12px));left:50%;transform:translateX(-50%);gap:5px}.readout,#compass{height:48px;padding:5px 8px}.readout .label{display:none}.brand-sub{display:none}.brand-title{font-size:14px}#bottom-note{display:none}#joystick,#joystickRight{top:70%;bottom:auto;transform:translateY(-50%);padding:10px 12px;border-radius:22px}.lever-track.vertical{width:58px;height:136px}.lever-track.horizontal{width:150px;height:58px}.lever-thumb{width:44px;height:44px;margin:-22px;font-size:13px}#controls{top:max(12px,env(safe-area-inset-top,12px));right:max(12px,env(safe-area-inset-right,12px));gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 180px)}.control{min-width:48px;height:50px}.control.wide{min-width:54px}.altitude-selector{right:max(14px,env(safe-area-inset-right,14px));top:calc(70% + 56px);bottom:auto;width:174px;height:50px;padding:4px 6px}.control.altitude{min-width:46px;width:46px;height:40px}.modal{padding:19px;border-radius:19px}.settings-grid{grid-template-columns:1fr}.setting.full{grid-column:auto}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Layout adattivo su due righe per smartphone e schermi in cui le icone non ci stanno in una sola riga */
+#ui[data-top-layout="two-rows"] #brand,
+body[data-top-layout="two-rows"] #brand {
+  top: max(10px, env(safe-area-inset-top, 10px));
+  left: max(12px, env(safe-area-inset-left, 12px));
+  right: auto;
+  height: 44px;
+  padding: 5px 11px 5px 8px;
+  border-radius: 14px;
+  gap: 8px;
+}
+#ui[data-top-layout="two-rows"] #brand .brand-mark,
+body[data-top-layout="two-rows"] #brand .brand-mark { width: 32px; height: 32px; font-size: 16px; border-radius: 10px; }
+#ui[data-top-layout="two-rows"] #brand .brand-title,
+body[data-top-layout="two-rows"] #brand .brand-title { font-size: 13px; line-height: 1.1; white-space: nowrap; }
+#ui[data-top-layout="two-rows"] #brand .brand-sub,
+body[data-top-layout="two-rows"] #brand .brand-sub { display: none; }
+
+#ui[data-top-layout="two-rows"] #telemetry,
+body[data-top-layout="two-rows"] #telemetry {
+  top: max(10px, env(safe-area-inset-top, 10px));
+  right: max(12px, env(safe-area-inset-right, 12px));
+  left: auto;
+  transform: none;
+  height: 44px;
+  gap: 6px;
+}
+#ui[data-top-layout="two-rows"] .readout,
+body[data-top-layout="two-rows"] .readout,
+#ui[data-top-layout="two-rows"] #compass,
+body[data-top-layout="two-rows"] #compass {
+  height: 44px;
+  min-width: auto;
+  padding: 4px 9px;
+  border-radius: 13px;
+}
+#ui[data-top-layout="two-rows"] .readout .label,
+body[data-top-layout="two-rows"] .readout .label { display: none; }
+#ui[data-top-layout="two-rows"] .readout .value,
+body[data-top-layout="two-rows"] .readout .value { font-size: 11px; }
+#ui[data-top-layout="two-rows"] #compass,
+body[data-top-layout="two-rows"] #compass { padding: 4px 8px; gap: 6px; }
+#ui[data-top-layout="two-rows"] .compass-rose,
+body[data-top-layout="two-rows"] .compass-rose { width: 34px; height: 36px; font-size: 8px; }
+#ui[data-top-layout="two-rows"] .compass-rose i,
+body[data-top-layout="two-rows"] .compass-rose i { font-size: 14px; top: 9px; left: 10px; }
+#ui[data-top-layout="two-rows"] #headingValue,
+body[data-top-layout="two-rows"] #headingValue { font-size: 11px; }
+
+#ui[data-top-layout="two-rows"] #controls,
+body[data-top-layout="two-rows"] #controls {
+  top: calc(max(10px, env(safe-area-inset-top, 10px)) + 50px);
+  right: max(12px, env(safe-area-inset-right, 12px));
+  left: auto;
+  transform: none;
+  gap: 6px;
+  max-width: calc(100vw - 24px);
+  flex-wrap: nowrap;
+}
+#ui[data-top-layout="two-rows"] .control,
+body[data-top-layout="two-rows"] .control {
+  min-width: 48px;
+  height: 46px;
+  padding: 4px 6px;
+  border-radius: 14px;
+  gap: 2px;
+}
+#ui[data-top-layout="two-rows"] .control.wide,
+body[data-top-layout="two-rows"] .control.wide { min-width: 52px; }
+#ui[data-top-layout="two-rows"] .control .ico,
+body[data-top-layout="two-rows"] .control .ico { font-size: 17px; }
+#ui[data-top-layout="two-rows"] .control .caption,
+body[data-top-layout="two-rows"] .control .caption { font-size: 7.5px; font-weight: 600; letter-spacing: .02em; }
+
+#ui[data-top-layout="two-rows"] #status,
+body[data-top-layout="two-rows"] #status {
+  top: calc(max(10px, env(safe-area-inset-top, 10px)) + 106px);
+  padding: 7px 12px;
+  font-size: 9.5px;
+}
+#ui[data-top-layout="two-rows"] #followBadge,
+body[data-top-layout="two-rows"] #followBadge {
+  top: calc(max(10px, env(safe-area-inset-top, 10px)) + 106px);
+  right: max(12px, env(safe-area-inset-right, 12px));
+}
+#ui[data-top-layout="two-rows"] #hint,
+body[data-top-layout="two-rows"] #hint { display: none; }
+
+@media (max-width: 860px) {
+  #brand {
+    top: max(10px, env(safe-area-inset-top, 10px));
+    left: max(12px, env(safe-area-inset-left, 12px));
+    right: auto;
+    height: 44px;
+    padding: 5px 11px 5px 8px;
+    border-radius: 14px;
+    gap: 8px;
+  }
+  #brand .brand-mark { width: 32px; height: 32px; font-size: 16px; border-radius: 10px; }
+  #brand .brand-title { font-size: 13px; line-height: 1.1; white-space: nowrap; }
+  #brand .brand-sub { display: none; }
+
+  #telemetry {
+    top: max(10px, env(safe-area-inset-top, 10px));
+    right: max(12px, env(safe-area-inset-right, 12px));
+    left: auto;
+    transform: none;
+    height: 44px;
+    gap: 6px;
+  }
+  .readout, #compass {
+    height: 44px;
+    min-width: auto;
+    padding: 4px 9px;
+    border-radius: 13px;
+  }
+  .readout .label { display: none; }
+  .readout .value { font-size: 11px; }
+  #compass { padding: 4px 8px; gap: 6px; }
+  .compass-rose { width: 34px; height: 36px; font-size: 8px; }
+  .compass-rose i { font-size: 14px; top: 9px; left: 10px; }
+  #headingValue { font-size: 11px; }
+
+  #controls {
+    top: calc(max(10px, env(safe-area-inset-top, 10px)) + 50px);
+    right: max(12px, env(safe-area-inset-right, 12px));
+    left: auto;
+    transform: none;
+    gap: 6px;
+    max-width: calc(100vw - 24px);
+    flex-wrap: nowrap;
+  }
+  .control {
+    min-width: 48px;
+    height: 46px;
+    padding: 4px 6px;
+    border-radius: 14px;
+    gap: 2px;
+  }
+  .control.wide { min-width: 52px; }
+  .control .ico { font-size: 17px; }
+  .control .caption { font-size: 7.5px; font-weight: 600; letter-spacing: .02em; }
+
+  #status {
+    top: calc(max(10px, env(safe-area-inset-top, 10px)) + 106px);
+    padding: 7px 12px;
+    font-size: 9.5px;
+  }
+  #followBadge {
+    top: calc(max(10px, env(safe-area-inset-top, 10px)) + 106px);
+    right: max(12px, env(safe-area-inset-right, 12px));
+  }
+  #hint { display: none; }
+}
+
+@media (pointer:coarse),(max-width:900px){
+  #followBadge{min-width:150px}
+  #bottom-note{bottom:24px}
+  .altitude-selector{right:max(20px,env(safe-area-inset-right,20px));top:calc(70% + 68px);bottom:auto;width:216px;height:60px;padding:5px 7px 5px 11px;gap:5px}
+  .control.altitude{min-width:58px;width:58px;height:48px}
+  #joystick{left:max(20px,env(safe-area-inset-left,20px));top:70%;bottom:auto;transform:translateY(-50%);padding:13px 15px}
+  #joystickRight{right:max(20px,env(safe-area-inset-right,20px));top:70%;bottom:auto;transform:translateY(-50%);padding:13px 15px}
+  .lever-track.vertical{width:72px;height:172px}
+  .lever-track.horizontal{width:186px;height:72px}
+  .lever-thumb{width:54px;height:54px;margin:-27px}
+}
+@media (max-width:680px){
+  #bottom-note{display:none}
+  #joystick,#joystickRight{top:70%;bottom:auto;transform:translateY(-50%);padding:10px 12px;border-radius:22px}
+  .lever-track.vertical{width:58px;height:136px}
+  .lever-track.horizontal{width:150px;height:58px}
+  .lever-thumb{width:44px;height:44px;margin:-22px;font-size:13px}
+  .altitude-selector{right:max(14px,env(safe-area-inset-right,14px));top:calc(70% + 56px);bottom:auto;width:174px;height:50px;padding:4px 6px}
+  .control.altitude{min-width:46px;width:46px;height:40px}
+  .modal{padding:19px;border-radius:19px}
+  .settings-grid{grid-template-columns:1fr}
+  .setting.full{grid-column:auto}
+}
+@media (max-width: 380px) {
+  #brand .brand-title { max-width: 96px; overflow: hidden; text-overflow: ellipsis; }
+  .control { min-width: 44px; height: 44px; padding: 3px 4px; }
+  .control.wide { min-width: 46px; }
+  .control .caption { font-size: 7px; }
+  #controls { gap: 4px; }
+}
 
 #exploration{position:absolute;top:122px;left:26px;width:258px;padding:14px 16px;border-radius:17px;pointer-events:auto;background:linear-gradient(140deg,rgba(22,57,56,.86),rgba(28,48,53,.77))}
 .exploration-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}.exploration-heading strong{color:#f0c982;font-size:12px}
@@ -3719,8 +3902,31 @@ Cerca ancora: il mondo non ha finito di raccontarsi.`.split('\n');
     for(let k=0;k<indices.length;k+=3){const cuts=[];for(let j=0;j<3;j++){const a=indices[k+j],b=indices[k+(j+1)%3],ha=p.getY(a)-1.6,hb=p.getY(b)-1.6;if((ha>0)!==(hb>0)){const t=ha/(ha-hb);cuts.push({x:lerp(p.getX(a),p.getX(b),t),z:lerp(p.getZ(a),p.getZ(b),t)});}}if(cuts.length!==2)continue;const [a,b]=cuts,len=Math.hypot(b.x-a.x,b.z-a.z);if(len<.1)continue;const nx=-(b.z-a.z)/len*.75,nz=(b.x-a.x)/len*.75,v=[[a.x+nx,1.82,a.z+nz],[a.x-nx,1.82,a.z-nz],[b.x+nx,1.82,b.z+nz],[b.x-nx,1.82,b.z-nz]];for(const i of [0,1,2,1,3,2])vertices.push(...v[i]);}
     const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geo.computeVertexNormals();coastalFoam=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:'#e0eee0',transparent:true,opacity:.25,depthWrite:false,side:THREE.DoubleSide}));coastalFoam.name='Risacca lungo la costa';coastalFoam.userData.inspect=water.userData.inspect;worldRoot.add(coastalFoam);pickables.push(coastalFoam);
   }
-  function resize() { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); applyQuality(); renderer.setSize(window.innerWidth, window.innerHeight, false);renderPausedWorld(); }
+  function updateTopBarLayout() {
+    const ui = $('ui');
+    if (!ui) return;
+    const w = window.innerWidth, h = window.innerHeight;
+    const isLandscapePhone = w > h && h < 520 && w >= 640;
+    const brand = $('brand'), telemetry = $('telemetry'), controls = $('controls');
+
+    let twoRows = false;
+    if (w < 860 && !isLandscapePhone) {
+      twoRows = true;
+    } else if (w < 640) {
+      twoRows = true;
+    } else if (brand && telemetry && controls) {
+      const bW = brand.offsetWidth || 180;
+      const tW = telemetry.offsetWidth || 210;
+      const cW = controls.offsetWidth || 300;
+      if (bW + tW + cW + 48 > w) twoRows = true;
+    }
+    ui.dataset.topLayout = twoRows ? 'two-rows' : 'one-row';
+    document.body.dataset.topLayout = ui.dataset.topLayout;
+  }
+
+  function resize() { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); applyQuality(); updateTopBarLayout(); renderer.setSize(window.innerWidth, window.innerHeight, false);renderPausedWorld(); }
   window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', () => setTimeout(updateTopBarLayout, 80));
   function renderPausedWorld(){if(gameStarted&&!document.hidden&&$('modal-wrap').classList.contains('open'))renderer.render(scene,camera);}
   const frameLoop={id:0,lastTime:null,nextTime:0,effects:0,sky:0,slow:0};
   function suspendRendering(){
@@ -3756,12 +3962,13 @@ Cerca ancora: il mondo non ha finito di raccontarsi.`.split('\n');
   createWorld();
   state.y=flightGround(state.x,state.z)+state.clearance;
   syncCarpetAndCamera(0);
+  updateTopBarLayout();
   $('modeValue').textContent = state.mode[0].toUpperCase() + state.mode.slice(1); document.querySelector('[data-action="mode"]').classList.toggle('active',state.mode==='verticale');
   $('fogToggle').checked = state.fogBorder; $('diag').style.display = state.diagnostics ? 'block' : 'none'; $('diagToggle').checked = state.diagnostics;
   document.addEventListener('click',event=>{if(!event.target.closest?.('#speech'))dismissSpeech();},true);
   $('speech').inert=true;$('discoveryCard').inert=true;
   $('startGame').disabled=false;$('startGame').textContent=state.discovered.length?'Riprendi il viaggio':'Entra nel mini mondo';$('startGame').focus({preventScroll:true});canvas.inert=true;
-  window.gameDebug = {townDetails,updateTownDetailBudget,deviceProfile,frameLoop,animate,suspendRendering,resumeRendering,announceDiscovery,closeInspect,get activeDiscovery(){return activeDiscovery;},villageWorkstations,createSocialPairs,workArmPose,updateTownLife,startGame,get gameStarted(){return gameStarted;},showInspection,aquaticLife,riverFish,woodlandRelics,updateAquaticLife,updateAtlasLandmarks,approachObject,inspectionPosition,renderIslandMap,atlasPlaces,applyCarpetAppearance,renderDiary,businesses,forestFinds,personalStories,get skyPuzzle(){return skyPuzzle;},touchSkySeal,updateVillageLife,dialogueFor,get distantForest(){return distantForest;},curiosities,fantasticAnimals,updateCuriosities,dismissSpeech,showSpeech, state, allObjects, pickables, scene, camera, renderer, inspectAt, saveState, createWorld, updateControls, updateResidents, updateFauna, routineTarget, advanceResident, heightAt, rawHeightAt, resolveData, resetControls, openModal, closeModal, held, input, residents, villages, fauna, caravans, trackedMeshes, terrainMesh, carpet, socialPairs, unusedExchange, rememberLines, updateSocialChatter, updateSocialBubbles, caravanSchedule, routePose, houseBoxes, crossesHouse, walkingPath, outsideHouses, talkTo, flightGround, roadMeshes, advanceLife, updateCaravans, get birdSchool(){return birdSchool;},get fishSchool(){return fishSchool;}, wonders,updateWonders,ringTemple,returnToVillage, cleanSaveData, updateSky, forestSpecies,discoveryPhrases,discoveryQueue,convoyProgress,discover,updateDiscoveryCard,dismissDiscovery,watercourses,riverAt,boats,updateWaterVisuals,waterMaterials,renderBudget,applyQuality,updateForestBudget,updateRenderBudget };
+  window.gameDebug = {updateTopBarLayout,townDetails,updateTownDetailBudget,deviceProfile,frameLoop,animate,suspendRendering,resumeRendering,announceDiscovery,closeInspect,get activeDiscovery(){return activeDiscovery;},villageWorkstations,createSocialPairs,workArmPose,updateTownLife,startGame,get gameStarted(){return gameStarted;},showInspection,aquaticLife,riverFish,woodlandRelics,updateAquaticLife,updateAtlasLandmarks,approachObject,inspectionPosition,renderIslandMap,atlasPlaces,applyCarpetAppearance,renderDiary,businesses,forestFinds,personalStories,get skyPuzzle(){return skyPuzzle;},touchSkySeal,updateVillageLife,dialogueFor,get distantForest(){return distantForest;},curiosities,fantasticAnimals,updateCuriosities,dismissSpeech,showSpeech, state, allObjects, pickables, scene, camera, renderer, inspectAt, saveState, createWorld, updateControls, updateResidents, updateFauna, routineTarget, advanceResident, heightAt, rawHeightAt, resolveData, resetControls, openModal, closeModal, held, input, residents, villages, fauna, caravans, trackedMeshes, terrainMesh, carpet, socialPairs, unusedExchange, rememberLines, updateSocialChatter, updateSocialBubbles, caravanSchedule, routePose, houseBoxes, crossesHouse, walkingPath, outsideHouses, talkTo, flightGround, roadMeshes, advanceLife, updateCaravans, get birdSchool(){return birdSchool;},get fishSchool(){return fishSchool;}, wonders,updateWonders,ringTemple,returnToVillage, cleanSaveData, updateSky, forestSpecies,discoveryPhrases,discoveryQueue,convoyProgress,discover,updateDiscoveryCard,dismissDiscovery,watercourses,riverAt,boats,updateWaterVisuals,waterMaterials,renderBudget,applyQuality,updateForestBudget,updateRenderBudget };
   window.addEventListener('beforeunload', saveState);
   window.danyBoot?.ready();
  }
